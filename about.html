@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | LinuxWallah</title>
+    <link class="icon" href="assets/shield-logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+      /* DEFAULT LIGHT THEME COLORS */
+      :root {
+        --about-bg: #f5f6fa;
+        --about-text: #1e272e;
+        --terminal-bg: #ffffff;
+        --terminal-border: #dcdde1;
+        --terminal-text: #2f3640;
+        --terminal-prompt: #00b894; 
+        --terminal-cmd: #2f3640;
+        --terminal-heading: #0984e3;
+        --logo-opacity: 1;
+      }
+
+      /* AUTOMATIC DARK THEME OVERRIDE */
+      html[data-theme="dark"] {
+        --about-bg: #0b0c10;
+        --about-text: #ffffff;
+        --terminal-bg: #121212;
+        --terminal-border: #1f2937;
+        --terminal-text: #d1d5db;
+        --terminal-prompt: #00ff88; 
+        --terminal-cmd: #ffffff;
+        --terminal-heading: var(--primary-blue, #2196F3);
+        --logo-opacity: 1;
+      }
+
+      /* Terminal Page Specific Layout and Styling */
+      .about-section {
+        background-color: var(--about-bg);
+        color: var(--about-text);
+        font-family: 'Courier New', Courier, monospace;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 140px 20px 60px 20px; 
+        min-height: 80vh;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      
+      .about-heading {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        color: var(--terminal-heading);
+        transition: color 0.3s ease;
+      }
+      
+      .logo-top-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 35px;
+        width: 100%;
+        opacity: var(--logo-opacity);
+        transition: opacity 0.3s ease;
+      }
+      
+      .custom-logo-hd {
+        width: 120px;
+        height: auto;
+        display: block;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+      }
+      
+      .terminal-container {
+        background-color: var(--terminal-bg) !important;
+        border: 1px solid var(--terminal-border) !important;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 800px;
+        margin-bottom: 30px;
+        padding: 22px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        position: relative;
+        min-height: 100px;
+        box-sizing: border-box;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+      
+      .terminal-container::after {
+        content: '';
+        position: absolute;
+        right: 15px;
+        top: 20px;
+        bottom: 20px;
+        width: 4px;
+        background-color: var(--terminal-prompt);
+        border-radius: 2px;
+        transition: background-color 0.3s ease;
+      }
+      
+      .terminal-header {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        border-bottom: 1px dashed var(--terminal-border);
+        padding-bottom: 10px;
+        font-weight: 600;
+        color: var(--terminal-text);
+        transition: border-color 0.3s ease, color 0.3s ease;
+      }
+      
+      .prompt {
+        color: var(--terminal-prompt);
+        font-weight: bold;
+        transition: color 0.3s ease;
+      }
+      
+      .command {
+        color: var(--terminal-cmd);
+        margin-left: 10px;
+        transition: color 0.3s ease;
+      }
+      
+      .terminal-body {
+        color: var(--terminal-text) !important;
+        font-size: 1rem;
+        line-height: 1.6;
+        padding-right: 25px;
+        white-space: pre-wrap;
+        transition: color 0.3s ease;
+      }
+      
+      .cursor {
+        display: inline-block;
+        width: 8px;
+        height: 16px;
+        background-color: var(--terminal-prompt);
+        vertical-align: middle;
+        margin-left: 4px;
+        animation: blink 1s step-end infinite;
+        transition: background-color 0.3s ease;
+      }
+      
+      @keyframes blink {
+        from, to { opacity: 1; }
+        50% { opacity: 0; }
+      }
+
+      /* Mobile Sizing Improvements */
+      @media (max-width: 768px) {
+        .custom-logo-hd {
+          width: 95px;
+        }
+        .about-heading {
+          font-size: 2rem;
+        }
+        .logo-top-container {
+          margin-bottom: 25px;
+        }
+      }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/full-logo.png" alt="LinuxWallah Logo">
+            </a>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="index.html#home">Home</a>
+                <a href="about.html" class="active">About</a>
+                <div class="dropdown">
+                    <a href="index.html#contact" class="dropbtn">Contact <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="https://wa.me/+919006865950" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <a href="https://www.instagram.com/shailesh.zx" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="https://www.linkedin.com/in/shailesh-zx" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/shailesh-zx/" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="tel:+919006865950"><i class="fas fa-phone"></i> Phone</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <a href="login.html" class="btn login-btn">Login</a>
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="about-section">
+        <h2 class="about-heading">About Us</h2>
+
+        <div class="logo-top-container">
+            <img src="assets/shield-logo.png" alt="LinuxWallah Shield Logo" class="custom-logo-hd">
+        </div>
+
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <span class="prompt">LinuxWallah@About:~$</span>
+                <span class="command">cat profile.md</span>
+            </div>
+            <div class="terminal-body" id="text1"></div>
+        </div>
+
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <span class="prompt">LinuxWallah@Journey:~$</span>
+                <span class="command">cat journey.log</span>
+            </div>
+            <div class="terminal-body" id="text2"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <div class="footer-logo">
+                    <img src="assets/shield-logo.png" alt="LinuxWallah Logo" style="width: 28px; vertical-align: middle; margin-right: 8px;">
+                    <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary-blue);">LinuxWallah</span>
+                </div>
+                <p>Master Ethical Hacking, AI, and Corporate Skills. Secure your future, learn continuously, and empower yourself.</p>
+                <div class="social-links">
+                    <a href="https://wa.me/+919006865950" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/shailesh.zx" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/shailesh-zx" title="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/shailesh-zx/" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <a href="index.html#home"><i class="fas fa-chevron-right" style="font-size: 0.8em; margin-right: 5px;"></i> Home</a>
+                <a href="about.html"><i class="fas fa-chevron-right" style="font-size: 0.8em; margin-right: 5px;"></i> About Us</a>
+                <a href="index.html#courses"><i class="fas fa-chevron-right" style="font-size: 0.8em; margin-right: 5px;"></i> Courses</a>
+                <a href="#"><i class="fas fa-chevron-right" style="font-size: 0.8em; margin-right: 5px;"></i> Privacy Policy</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Top Courses</h3>
+                <a href="index.html#courses"><i class="fas fa-user-secret" style="width: 20px;"></i> Ethical Hacking</a>
+                <a href="index.html#courses"><i class="fas fa-shield-alt" style="width: 20px;"></i> Cyber Security</a>
+                <a href="index.html#courses"><i class="fas fa-brain" style="width: 20px;"></i> Artificial Intelligence</a>
+                <a href="index.html#courses"><i class="fas fa-file-excel" style="width: 20px;"></i> Corporate Excel</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-phone-alt" style="color: var(--primary-blue); width: 20px;"></i> +91 90068 65950</p>
+                <p><i class="fas fa-envelope" style="color: var(--primary-blue); width: 20px;"></i> hello@LinuxWallah.com</p>
+                <p><i class="fas fa-map-marker-alt" style="color: var(--primary-blue); width: 20px;"></i> Hyderabad, Telangana</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 LinuxWallah. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-header">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <img src="assets/shield-logo.png" alt="AI" style="width: 24px; height: 24px;">
+                <span style="font-weight: bold;">LinuxWallah AI</span>
+            </div>
+            <button id="close-chat" style="background:none; border:none; color:white; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chatbot-body">
+            <div class="bot-msg">Hello! Ask LinuxWallah AI anything...</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your question...">
+            <button style="background:none; border:none; color:var(--primary-blue); cursor:pointer; font-size:18px;"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <div class="floating-controls">
+        <button id="theme-toggle" class="theme-btn" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button id="chat-toggle" class="chat-btn" title="Open AI Chat">
+            <img src="assets/shield-logo.png" alt="Chat">
+        </button>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/mobile-menu.js"></script>
+
+    <script>
+      const text1 = `Hi, I'm Shailesh Kushwaha (Shailesh Zx) — an Ethical Hacker, Cybersecurity Specialist, Full-Stack Developer, Linux Expert, Coder, and AI Agent & Chatbot Builder with 5+ years of experience. I specialize in developing secure, intelligent, and innovative technology solutions, combining software development, cybersecurity, Linux expertise, and AI automation to solve real-world challenges.
+
+Passionate about technology and continuous learning, I actively explore the latest advancements in cybersecurity, ethical hacking, software development, and artificial intelligence. My goal is to build powerful, secure, and efficient digital experiences that make a difference.
+
+My identity is simple: I am different, and that's what makes me unique. 🚀
+
+Developer • Ethical Hacker • Cybersecurity Specialist • Linux Expert • Lifelong Learner`;
+
+      const text2 = `Technical Milestones Log:
+[2021] ✓ Initialized Terminal Core, Mastered Basic Linux Commands & Architecture
+[2022] ✓ Deep-dived into Operating Systems, File System Security & Dual-Boot Configurations
+[2023] ✓ Acquired Full-Stack & Database Scripting Fundamentals (HTML, CSS, JS, SQL, SQLite, Python)
+[2024] ✓ Transitioned to Advanced Network Scanning, Exploitation, Packet Sniffing & Vulnerability Assessment
+[2025] ✓ Engineered Autonomous AI Agents, Custom Local LLMs & Offline Intelligent Chatbots
+[2026] ✓ Deployed Secure Full-Stack Infrastructure & Cyber Security Course Deployment for LinuxWallah Platform
+
+Mission: Building Privacy-First Autonomous Infrastructure, Penetration Testing Frameworks & Next-Gen Cyber Defense Ecosystems.`;
+
+      function typeEffect(elementId, text, speed, callback) {
+        let i = 0;
+        const element = document.getElementById(elementId);
+        if(!element) return;
+        
+        function typing() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+          } else {
+            element.innerHTML += '<span class="cursor"></span>';
+            if(callback) callback();
+          }
+        }
+        typing();
+      }
+
+      window.addEventListener('load', () => {
+        typeEffect('text1', text1, 12, function() {
+          typeEffect('text2', text2, 12);
+        });
+      });
+    </script>
+</body>
+</html>

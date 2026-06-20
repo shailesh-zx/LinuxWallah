@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinuxWallah | Secure • Learn • Empower</title>
+    <link rel="icon" href="assets/shield-logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/full-logo.png" alt="LinuxWallah Logo">
+            </a>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="about.html">About</a>
+                <div class="dropdown">
+                    <a href="#contact" class="dropbtn">Contact <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="https://wa.me/+919006865950"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <a href="https://www.instagram.com/shailesh.zx"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="https://www.linkedin.com/in/shailesh-zx"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/shailesh-zx/"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <a href="login.html" class="btn login-btn">Login</a>
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <h1 class="typing-container">
+                <span id="typing-text"></span><span class="cursor">|</span>
+            </h1>
+            <p style="margin-top: 25px; font-size: 1.1rem; font-family: 'Montserrat', sans-serif; font-weight: 400; color: var(--text-color);">Master Ethical Hacking, AI, and Corporate Skills.</p>
+        </div>
+    </header>
+
+    <section id="courses" class="categories">
+        <h2 style="text-align: center; margin-bottom: 40px; color: var(--primary-blue); font-size: 2rem;">Explore Our Courses</h2>
+        <div class="card-grid">
+            
+            <div class="glass-card" onclick="window.location.href='courses/ethical-hacking.html'" style="cursor: pointer;">
+                <i class="fas fa-user-secret icon" style="color: var(--accent-green);"></i>
+                <h3>Ethical Hacking</h3>
+                <ul>
+                    <li>Vulnerability Assessment</li>
+                    <li>Exploitation</li>
+                    <li>Reporting</li>
+                </ul>
+            </div>
+
+            <div class="glass-card" onclick="window.location.href='courses/cyber-security.html'" style="cursor: pointer;">
+                <i class="fas fa-shield-alt icon" style="color: var(--primary-blue);"></i>
+                <h3>Cyber Security</h3>
+                <ul>
+                    <li>Threat Hunting</li>
+                    <li>Malware Analysis</li>
+                </ul>
+            </div>
+
+            <div class="glass-card" onclick="window.location.href='courses/coding.html'" style="cursor: pointer;">
+                <i class="fas fa-code icon" style="color: #ff9800;"></i>
+                <h3>Coding</h3>
+                <ul>
+                    <li>Python</li>
+                    <li>JavaScript</li>
+                    <li>Bash</li>
+                </ul>
+            </div>
+
+            <div class="glass-card" onclick="window.location.href='courses/operating-systems.html'" style="cursor: pointer;">
+                <i class="fas fa-laptop-code icon" style="color: #e91e63;"></i>
+                <h3>Operating Systems</h3>
+                <ul>
+                    <li>Windows</li>
+                    <li>Linux</li>
+                    <li>MacOS</li>
+                </ul>
+            </div>
+
+            <div class="glass-card" onclick="window.location.href='courses/excel.html'" style="cursor: pointer;">
+                <i class="fas fa-file-excel icon" style="color: #4caf50;"></i>
+                <h3>Excel</h3>
+                <ul>
+                    <li>Formulas & Functions</li>
+                    <li>Pivot Tables</li>
+                    <li>Dashboards & VBA</li>
+                </ul>
+            </div>
+
+            <div class="glass-card" onclick="window.location.href='courses/artificial-intelligence.html'" style="cursor: pointer;">
+                <i class="fas fa-brain icon" style="color: #9c27b0;"></i>
+                <h3>Artificial Intelligence</h3>
+                <ul>
+                    <li>ChatGPT / Gemini</li>
+                    <li>Local LLM (Ollama)</li>
+                    <li>AI Automation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <div class="footer-logo">
+                    <img src="assets/shield-logo.png" alt="LinuxWallah Logo" style="width: 28px; vertical-align: middle; margin-right: 8px;">
+                    <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary-blue);">LinuxWallah</span>
+                </div>
+                <p>Master Ethical Hacking, AI, and Corporate Skills. Secure your future, learn continuously, and empower yourself.</p>
+                <div class="social-links">
+                    <a href="https://wa.me/+919006865950" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/shailesh.zx" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/shailesh-zx" title="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/shailesh-zx/" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <a href="#home"><i class="fas fa-chevron-right" style="font-size: 0.8em; margin-right: 5px;"></i> Home</a>
+                <a href="about.html"><i class="fas fa-chevron-right" style="font-size: 0.8em; margin-right: 5px;"></i> About Us</a>
+                <a href="#courses"><i class="fas fa-chevron-right" style="font-size: 0.8em; margin-right: 5px;"></i> Courses</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Top Courses</h3>
+                <a href="courses/ethical-hacking.html"><i class="fas fa-user-secret" style="width: 20px;"></i> Ethical Hacking</a>
+                <a href="courses/cyber-security.html"><i class="fas fa-shield-alt" style="width: 20px;"></i> Cyber Security</a>
+                <a href="courses/artificial-intelligence.html"><i class="fas fa-brain" style="width: 20px;"></i> Artificial Intelligence</a>
+                <a href="courses/excel.html"><i class="fas fa-file-excel" style="width: 20px;"></i> Corporate Excel</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-phone-alt" style="color: var(--primary-blue); width: 20px;"></i> +91 90068 65950</p>
+                <p><i class="fas fa-envelope" style="color: var(--primary-blue); width: 20px;"></i> hello@LinuxWallah.com</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 LinuxWallah. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-header">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <img src="assets/shield-logo.png" alt="AI" style="width: 24px; height: 24px;">
+                <span style="font-weight: bold;">LinuxWallah AI</span>
+            </div>
+            <button id="close-chat" style="background:none; border:none; color:white; font-size:18px; cursor:pointer;"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chatbot-body">
+            <div class="bot-msg">Hello! Ask LinuxWallah AI anything...</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your question...">
+            <button style="background:none; border:none; color:var(--primary-blue); cursor:pointer; font-size:18px;"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <div class="floating-controls">
+        <button id="theme-toggle" class="theme-btn" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button id="chat-toggle" class="chat-btn" title="Open AI Chat">
+            <img src="assets/shield-logo.png" alt="Chat">
+        </button>
+    </div>
+
+    <script src="js/typing.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/mobile-menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+/* Operating Systems Course Specific Styles */
+
+.course-hero {
+    position: relative;
+    padding: 150px 5% 80px;
+    background: linear-gradient(135deg, rgba(11, 17, 32, 0.95), rgba(0, 188, 212, 0.1));
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.course-main-icon {
+    font-size: 60px;
+    color: #00BCD4; /* Teal / Cyan */
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(0, 188, 212, 0.4);
+}
+
+.course-hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.course-hero p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    opacity: 0.85;
+    line-height: 1.6;
+}
+
+.course-meta {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.course-meta span {
+    font-size: 0.95rem;
+    font-weight: 500;
+    background: var(--card-bg);
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.course-meta i {
+    color: #00BCD4;
+    margin-right: 5px;
+}
+
+.enroll-btn {
+    padding: 12px 35px;
+    font-size: 1.1rem;
+    background: #00BCD4;
+    color: #000; /* Dark text for better contrast on cyan */
+    font-weight: bold;
+    transition: transform 0.3s;
+    display: inline-block;
+}
+.enroll-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 188, 212, 0.4);
+}
+
+.course-details {
+    padding: 60px 5%;
+}
+
+.details-container {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.course-details h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: var(--primary-blue);
+}
+
+.learn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.learn-item {
+    background: var(--card-bg);
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    font-weight: 500;
+}
+
+.learn-item i {
+    color: #00BCD4;
+    margin-right: 10px;
+}
+
+.syllabus {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.module-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.module-card:hover {
+    border-color: #00BCD4;
+    box-shadow: 0 5px 15px rgba(0, 188, 212, 0.15);
+}
+
+.module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.module-header h3 {
+    font-size: 1.2rem;
+}
+
+.module-header i {
+    font-size: 1.5rem;
+    color: var(--primary-blue);
+    opacity: 0.5;
+}
+
+.pricing-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 30px;
+    position: sticky;
+    top: 100px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-color);
+    margin: 15px 0 5px;
+}
+
+.price span {
+    font-size: 1.2rem;
+    text-decoration: line-through;
+    opacity: 0.5;
+    font-weight: normal;
+}
+
+.discount {
+    color: #00BCD4;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.features li {
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.features i {
+    width: 25px;
+    color: var(--primary-blue);
+}
+
+.btn-full {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    background: #00BCD4;
+    color: #000;
+    font-weight: bold;
+}
+
+@media (max-width: 900px) {
+    .details-container { grid-template-columns: 1fr; }
+    .learn-grid { grid-template-columns: 1fr; }
+}
