@@ -283,6 +283,7 @@
     </div>
 
     <script>
+        // UI Toggle Logic
         function showLogin() {
             document.getElementById('login-form').classList.remove('hidden');
             document.getElementById('signup-form').classList.add('hidden');
@@ -302,6 +303,52 @@
             document.getElementById('signup-toggle').classList.add('active');
             document.getElementById('login-toggle').classList.remove('active');
         }
+
+        // Email Validation Logic (No Temp Mails)
+        const allowedDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com"];
+
+        function validateEmailInput(emailValue) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            // 1. Check basic format
+            if (!emailRegex.test(emailValue)) {
+                alert("कृपया सही ईमेल फॉर्मेट डालें!");
+                return false;
+            }
+
+            // 2. Extract domain
+            const domain = emailValue.split('@')[1].toLowerCase();
+
+            // 3. Check against allowed list
+            if (!allowedDomains.includes(domain)) {
+                alert("Temp mail या Fake email की अनुमति नहीं है। कृपया असली ईमेल (जैसे @gmail.com) का उपयोग करें।");
+                return false;
+            }
+
+            return true;
+        }
+
+        // Attach Submit Event to Login Form
+        document.querySelector('#login-form form').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            const emailInput = this.querySelector('input[type="email"]').value; 
+            
+            if (validateEmailInput(emailInput)) {
+                alert("ईमेल सही है! लॉगिन प्रोसेस शुरू हो रहा है...");
+                // Backend login code yaha aayega
+            }
+        });
+
+        // Attach Submit Event to Signup Form
+        document.querySelector('#signup-form form').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            const emailInput = this.querySelector('input[type="email"]').value; 
+            
+            if (validateEmailInput(emailInput)) {
+                alert("ईमेल एकदम सही है! अब हम डेटाबेस में एंट्री कर सकते हैं।");
+                // Backend signup code yaha aayega
+            }
+        });
     </script>
 </body>
 </html>
