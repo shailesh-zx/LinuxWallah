@@ -119,12 +119,12 @@
         function validateEmailInput(emailValue) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(emailValue)) {
-                alert("कृपया सही ईमेल फॉर्मेट डालें!");
+                alert("Please enter a valid email address!");
                 return false;
             }
             const domain = emailValue.split('@')[1].toLowerCase();
             if (!allowedDomains.includes(domain)) {
-                alert("Temp mail या Fake email की अनुमति नहीं है। कृपया असली ईमेल का उपयोग करें।");
+                alert("Temporary or fake emails are not allowed. Please use a valid email address.");
                 return false;
             }
             return true;
@@ -145,13 +145,13 @@
                     const data = await response.json();
                     
                     if (response.ok) {
-                        alert("लॉगिन सफल हुआ! Welcome " + data.user.username);
-                        // window.location.href = "/dashboard.html";
+                        alert("Login successful! Welcome " + data.user.username);
+                        // window.location.href = "/dashboard.html"; // Uncomment to redirect after login
                     } else {
                         alert("Error: " + data.error);
                     }
                 } catch (error) {
-                    alert("सर्वर से कनेक्ट नहीं हो सका।");
+                    alert("Could not connect to the server.");
                 }
             }
         });
@@ -164,7 +164,7 @@
             const confirmPassword = document.getElementById('signup-confirm').value;
             
             if (password !== confirmPassword) {
-                alert("पासवर्ड और कन्फर्म पासवर्ड मैच नहीं हो रहे हैं!");
+                alert("Passwords do not match!");
                 return;
             }
 
@@ -178,13 +178,13 @@
                     const data = await response.json();
                     
                     if (response.ok) {
-                        alert("अकाउंट सफलतापूर्वक बन गया! अब आप लॉगिन कर सकते हैं।");
+                        alert("Account created successfully! You can login now.");
                         showLogin();
                     } else {
                         alert("Error: " + data.error);
                     }
                 } catch (error) {
-                    alert("सर्वर से कनेक्ट नहीं हो सका।");
+                    alert("Could not connect to the server.");
                 }
             }
         });
