@@ -1,368 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Login & Signup To LinuxWallah</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Import Google Font */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Login & Signup To LinuxWallah</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Import Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(to bottom, #050505 50%, #9da3d1 50%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px; 
-        }
-
-        .container {
-            background: #ffffff;
-            width: 100%; 
-            max-width: 400px; 
-            padding: 40px 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .form-title {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 600;
-            color: #111;
-            margin-bottom: 25px;
-        }
-
-        /* Toggle Buttons Setup */
-        .toggle-box {
-            display: flex;
-            border: 1px solid #e0e0e0;
-            border-radius: 30px;
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        .toggle-btn {
-            flex: 1;
-            padding: 10px 0;
-            border: none;
-            background: transparent;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-btn.active {
-            background: #0860bb;
-            color: #ffffff;
-            border-radius: 30px;
-        }
-
-        .toggle-btn:not(.active) {
-            color: #333;
-        }
-
-        /* Input Fields */
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 15px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 15px;
-            outline: none;
-            transition: border 0.3s;
-        }
-
-        .form-group input::placeholder {
-            color: #9ca3af;
-        }
-
-        .form-group input:focus {
-            border-color: #0860bb;
-        }
-
-        /* Links & Buttons */
-        .forgot-pass {
-            text-align: left;
-            color: #0860bb;
-            font-size: 14px;
-            text-decoration: none;
-            margin-top: -5px;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        .forgot-pass:hover {
-            text-decoration: underline;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background: #00448a;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .submit-btn:hover {
-            background: #00366d;
-        }
-
-        /* Divider (OR) */
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 20px 0;
-            color: #6b7280;
-            font-size: 14px;
-        }
-
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid #d1d5db;
-        }
-
-        .divider:not(:empty)::before {
-            margin-right: 15px;
-        }
-
-        .divider:not(:empty)::after {
-            margin-left: 15px;
-        }
-
-        /* Social Login Buttons */
-        .social-login {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .social-btn {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #333;
-            font-size: 14px;
-            font-weight: 500;
-            transition: background 0.3s;
-        }
-
-        .social-btn:hover {
-            background: #f3f4f6;
-        }
-
-        .social-btn i {
-            font-size: 18px;
-        }
-
-        .google i { color: #db4437; }
-        .github i { color: #333; }
-
-        .bottom-text {
-            text-align: center;
-            font-size: 14px;
-            color: #333;
-        }
-
-        .bottom-text a {
-            color: #0860bb;
-            text-decoration: none;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .bottom-text a:hover {
-            text-decoration: underline;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        @media (max-width: 480px) {
-            .container { padding: 30px 20px; }
-            .form-title { font-size: 24px; }
-            .social-login { flex-direction: column; gap: 12px; }
-            .social-btn { width: 100%; padding: 12px; }
-        }
-    </style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: linear-gradient(to bottom, #050505 50%, #9da3d1 50%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { background: #ffffff; width: 100%; max-width: 400px; padding: 40px 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); }
+        .form-title { text-align: center; font-size: 28px; font-weight: 600; color: #111; margin-bottom: 25px; }
+        .toggle-box { display: flex; border: 1px solid #e0e0e0; border-radius: 30px; margin-bottom: 25px; position: relative; }
+        .toggle-btn { flex: 1; padding: 10px 0; border: none; background: transparent; font-size: 16px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
+        .toggle-btn.active { background: #0860bb; color: #ffffff; border-radius: 30px; }
+        .toggle-btn:not(.active) { color: #333; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group input { width: 100%; padding: 12px 15px; margin-bottom: 15px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; outline: none; transition: border 0.3s; }
+        .form-group input::placeholder { color: #9ca3af; }
+        .form-group input:focus { border-color: #0860bb; }
+        .forgot-pass { text-align: left; color: #0860bb; font-size: 14px; text-decoration: none; margin-top: -5px; margin-bottom: 20px; display: inline-block; }
+        .forgot-pass:hover { text-decoration: underline; }
+        .submit-btn { width: 100%; padding: 12px; background: #00448a; color: #ffffff; border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.3s; }
+        .submit-btn:hover { background: #00366d; }
+        .divider { display: flex; align-items: center; text-align: center; margin: 20px 0; color: #6b7280; font-size: 14px; }
+        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #d1d5db; }
+        .divider:not(:empty):before { margin-right: 15px; }
+        .divider:not(:empty):after { margin-left: 15px; }
+        .social-login { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 20px; }
+        .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; text-decoration: none; color: #333; font-size: 14px; font-weight: 500; transition: background 0.3s; }
+        .social-btn:hover { background: #f3f4f6; }
+        .social-btn i { font-size: 18px; }
+        .google i { color: #db4437; }
+        .github i { color: #333; }
+        .bottom-text { text-align: center; font-size: 14px; color: #333; }
+        .bottom-text a { color: #0860bb; text-decoration: none; font-weight: 500; cursor: pointer; }
+        .bottom-text a:hover { text-decoration: underline; }
+        .hidden { display: none; }
+        @media (max-width: 480px) {
+            .container { padding: 30px 20px; }
+            .form-title { font-size: 24px; }
+            .social-login { flex-direction: column; gap: 12px; }
+            .social-btn { width: 100%; padding: 12px; }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="container">
-        <h2 class="form-title" id="form-title">Login To LinuxWallah</h2>
-        
-        <div class="toggle-box">
-            <button type="button" class="toggle-btn active" id="login-toggle" onclick="showLogin()">Login</button>
-            <button type="button" class="toggle-btn" id="signup-toggle" onclick="showSignup()">Signup</button>
-        </div>
+    <div class="container">
+        <h2 class="form-title" id="form-title">Login To LinuxWallah</h2>
+        
+        <div class="toggle-box">
+            <button type="button" class="toggle-btn active" id="login-toggle" onclick="showLogin()">Login</button>
+            <button type="button" class="toggle-btn" id="signup-toggle" onclick="showSignup()">Signup</button>
+        </div>
 
-        <div id="login-form">
-            <form class="form-group">
-                <input type="email" id="login-email" placeholder="Email Address" required>
-                <input type="password" id="login-password" placeholder="Password" required>
-                <a href="#" class="forgot-pass">Forgot password?</a>
-                <button type="submit" class="submit-btn">Login</button>
-            </form>
+        <div id="login-form">
+            <form class="form-group">
+                <input type="email" id="login-email" placeholder="Email Address" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <a href="#" class="forgot-pass">Forgot password?</a>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
 
-            <div class="divider">Or login with</div>
+            <div class="divider">Or login with</div>
 
-            <div class="social-login">
-                <a href="#" class="social-btn google"><i class="fa-brands fa-google"></i> Google</a>
-                <a href="#" class="social-btn github"><i class="fa-brands fa-github"></i> GitHub</a>
-            </div>
+            <div class="social-login">
+                <a href="https://linuxwallah-auth.shailesh-github.workers.dev/auth/google" class="social-btn google"><i class="fa-brands fa-google"></i> Google</a>
+                <a href="https://linuxwallah-auth.shailesh-github.workers.dev/auth/github" class="social-btn github"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
 
-            <p class="bottom-text">Not a member? <a onclick="showSignup()">Signup now</a></p>
-        </div>
+            <p class="bottom-text">Not a member? <a onclick="showSignup()">Signup now</a></p>
+        </div>
 
-        <div id="signup-form" class="hidden">
-            <form class="form-group">
-                <input type="text" id="signup-username" placeholder="Username" required>
-                <input type="email" id="signup-email" placeholder="Email Address" required>
-                <input type="password" id="signup-password" placeholder="Password" required>
-                <input type="password" id="signup-confirm" placeholder="Confirm password" required>
-                <button type="submit" class="submit-btn">Signup</button>
-            </form>
+        <div id="signup-form" class="hidden">
+            <form class="form-group">
+                <input type="text" id="signup-username" placeholder="Username" required>
+                <input type="email" id="signup-email" placeholder="Email Address" required>
+                <input type="password" id="signup-password" placeholder="Password" required>
+                <input type="password" id="signup-confirm" placeholder="Confirm password" required>
+                <button type="submit" class="submit-btn">Signup</button>
+            </form>
 
-            <div class="divider">Or signup with</div>
+            <div class="divider">Or signup with</div>
 
-            <div class="social-login">
-                <a href="#" class="social-btn google"><i class="fa-brands fa-google"></i> Google</a>
-                <a href="#" class="social-btn github"><i class="fa-brands fa-github"></i> GitHub</a>
-            </div>
+            <div class="social-login">
+                <a href="https://linuxwallah-auth.shailesh-github.workers.dev/auth/google" class="social-btn google"><i class="fa-brands fa-google"></i> Google</a>
+                <a href="https://linuxwallah-auth.shailesh-github.workers.dev/auth/github" class="social-btn github"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
 
-            <p class="bottom-text">Already a member? <a onclick="showLogin()">Login now</a></p>
-        </div>
-    </div>
+            <p class="bottom-text">Already a member? <a onclick="showLogin()">Login now</a></p>
+        </div>
+    </div>
 
-    <script>
-        // Your Worker URL
-        const WORKER_URL = "https://linuxwallah-auth.shailesh-github.workers.dev";
+    <script>
+        const WORKER_URL = "https://linuxwallah-auth.shailesh-github.workers.dev";
 
-        // UI Toggle Logic
-        function showLogin() {
-            document.getElementById('login-form').classList.remove('hidden');
-            document.getElementById('signup-form').classList.add('hidden');
-            document.getElementById('form-title').innerText = 'Login To LinuxWallah';
-            document.getElementById('login-toggle').classList.add('active');
-            document.getElementById('signup-toggle').classList.remove('active');
-        }
+        function showLogin() {
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('signup-form').classList.add('hidden');
+            document.getElementById('form-title').innerText = 'Login To LinuxWallah';
+            document.getElementById('login-toggle').classList.add('active');
+            document.getElementById('signup-toggle').classList.remove('active');
+        }
 
-        function showSignup() {
-            document.getElementById('login-form').classList.add('hidden');
-            document.getElementById('signup-form').classList.remove('hidden');
-            document.getElementById('form-title').innerText = 'Signup To LinuxWallah';
-            document.getElementById('signup-toggle').classList.add('active');
-            document.getElementById('login-toggle').classList.remove('active');
-        }
+        function showSignup() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('signup-form').classList.remove('hidden');
+            document.getElementById('form-title').innerText = 'Signup To LinuxWallah';
+            document.getElementById('signup-toggle').classList.add('active');
+            document.getElementById('login-toggle').classList.remove('active');
+        }
 
-        // Email Validation Logic
-        const allowedDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com"];
+        const allowedDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com"];
 
-        function validateEmailInput(emailValue) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailValue)) {
-                alert("कृपया सही ईमेल फॉर्मेट डालें!");
-                return false;
-            }
-            const domain = emailValue.split('@')[1].toLowerCase();
-            if (!allowedDomains.includes(domain)) {
-                alert("Temp mail या Fake email की अनुमति नहीं है। कृपया असली ईमेल का उपयोग करें।");
-                return false;
-            }
-            return true;
-        }
+        function validateEmailInput(emailValue) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailValue)) {
+                alert("कृपया सही ईमेल फॉर्मेट डालें!");
+                return false;
+            }
+            const domain = emailValue.split('@')[1].toLowerCase();
+            if (!allowedDomains.includes(domain)) {
+                alert("Temp mail या Fake email की अनुमति नहीं है। कृपया असली ईमेल का उपयोग करें।");
+                return false;
+            }
+            return true;
+        }
 
-        // --- LOGIN LOGIC ---
-        document.querySelector('#login-form form').addEventListener('submit', async function(e) {
-            e.preventDefault(); 
-            const email = document.getElementById('login-email').value; 
-            const password = document.getElementById('login-password').value;
-            
-            if (validateEmailInput(email)) {
-                try {
-                    const response = await fetch(`${WORKER_URL}/login`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ email, password })
-                    });
-                    const data = await response.json();
-                    
-                    if (response.ok) {
-                        alert("लॉगिन सफल हुआ! Welcome " + data.user.username);
-                        // window.location.href = "/dashboard.html"; // Redirect user here
-                    } else {
-                        alert("Error: " + data.error);
-                    }
-                } catch (error) {
-                    alert("सर्वर से कनेक्ट नहीं हो सका।");
-                }
-            }
-        });
+        document.querySelector('#login-form form').addEventListener('submit', async function(e) {
+            e.preventDefault(); 
+            const email = document.getElementById('login-email').value; 
+            const password = document.getElementById('login-password').value;
+            
+            if (validateEmailInput(email)) {
+                try {
+                    const response = await fetch(`${WORKER_URL}/login`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email, password })
+                    });
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        alert("लॉगिन सफल हुआ! Welcome " + data.user.username);
+                        // window.location.href = "/dashboard.html";
+                    } else {
+                        alert("Error: " + data.error);
+                    }
+                } catch (error) {
+                    alert("सर्वर से कनेक्ट नहीं हो सका।");
+                }
+            }
+        });
 
-        // --- SIGNUP LOGIC ---
-        document.querySelector('#signup-form form').addEventListener('submit', async function(e) {
-            e.preventDefault(); 
-            const username = document.getElementById('signup-username').value;
-            const email = document.getElementById('signup-email').value; 
-            const password = document.getElementById('signup-password').value;
-            const confirmPassword = document.getElementById('signup-confirm').value;
-            
-            if (password !== confirmPassword) {
-                alert("पासवर्ड और कन्फर्म पासवर्ड मैच नहीं हो रहे हैं!");
-                return;
-            }
+        document.querySelector('#signup-form form').addEventListener('submit', async function(e) {
+            e.preventDefault(); 
+            const username = document.getElementById('signup-username').value;
+            const email = document.getElementById('signup-email').value; 
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm').value;
+            
+            if (password !== confirmPassword) {
+                alert("पासवर्ड और कन्फर्म पासवर्ड मैच नहीं हो रहे हैं!");
+                return;
+            }
 
-            if (validateEmailInput(email)) {
-                try {
-                    const response = await fetch(`${WORKER_URL}/signup`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ username, email, password })
-                    });
-                    const data = await response.json();
-                    
-                    if (response.ok) {
-                        alert("अकाउंट सफलतापूर्वक बन गया! अब आप लॉगिन कर सकते हैं।");
-                        showLogin(); // Signup hone ke baad login page dikhao
-                    } else {
-                        alert("Error: " + data.error);
-                    }
-                } catch (error) {
-                    alert("सर्वर से कनेक्ट नहीं हो सका।");
-                }
-            }
-        });
-    </script>
+            if (validateEmailInput(email)) {
+                try {
+                    const response = await fetch(`${WORKER_URL}/signup`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ username, email, password })
+                    });
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        alert("अकाउंट सफलतापूर्वक बन गया! अब आप लॉगिन कर सकते हैं।");
+                        showLogin();
+                    } else {
+                        alert("Error: " + data.error);
+                    }
+                } catch (error) {
+                    alert("सर्वर से कनेक्ट नहीं हो सका।");
+                }
+            }
+        });
+    </script>
 </body>
 </html>
