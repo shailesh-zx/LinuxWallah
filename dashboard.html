@@ -11,7 +11,7 @@
         body { font-family: 'Montserrat', sans-serif; background: #0a0a0f; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
         .dash-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 40px; border-radius: 12px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px); max-width: 400px; width: 100%; }
         .dash-avatar { width: 90px; height: 90px; border-radius: 50%; border: 3px solid #0860bb; margin-bottom: 20px; }
-        h1 { margin: 10px 0; font-size: 1.8rem; color: #0860bb; }
+        h1 { margin: 10px 0; font-size: 1.8rem; color: #0860bb; text-transform: capitalize; }
         p { color: #aaa; margin: 5px 0 25px 0; font-size: 1rem; }
         .btn-home { background: #0860bb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
         .btn-home:hover { background: #064b93; transform: translateY(-2px); }
@@ -35,10 +35,24 @@
                 window.location.href = "login.html";
                 return;
             }
-            const user = JSON.parse(userData);
-            // Ek ek karke check karega ki kis key me data mila
-            document.getElementById("dash-name").innerText = user.username || user.name || user.full_name || "LinuxWallah Student";
-            document.getElementById("dash-email").innerText = user.email || "No Email Provided";
+            
+            try {
+                const user = JSON.parse(userData);
+                
+                // Sab variables ko check karo
+                let finalName = user.username || user.name || user.full_name || user.user || "LinuxWallah Student";
+                let finalEmail = user.email || "No Email Provided";
+
+                // 🔥 BULLETPROOF CHECK
+                if (finalName === "undefined") finalName = "LinuxWallah Student";
+                if (finalEmail === "undefined") finalEmail = "No Email Provided";
+
+                document.getElementById("dash-name").innerText = finalName;
+                document.getElementById("dash-email").innerText = finalEmail;
+            } catch (error) {
+                localStorage.removeItem("user");
+                window.location.href = "login.html";
+            }
         });
     </script>
 </body>
