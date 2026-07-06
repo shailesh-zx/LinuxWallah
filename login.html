@@ -18,9 +18,17 @@
         .toggle-btn.active { background: #0860bb; color: #ffffff; border-radius: 30px; }
         .toggle-btn:not(.active) { color: #333; }
         .form-group { display: flex; flex-direction: column; }
+        
         .form-group input { width: 100%; padding: 12px 15px; margin-bottom: 15px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; outline: none; transition: border 0.3s; }
         .form-group input::placeholder { color: #9ca3af; }
         .form-group input:focus { border-color: #0860bb; }
+        
+        /* 🔥 NEW CSS FOR PASSWORD EYE ICON */
+        .password-wrapper { position: relative; width: 100%; margin-bottom: 15px; }
+        .password-wrapper input { margin-bottom: 0; padding-right: 40px; } /* Right padding so text doesn't touch icon */
+        .toggle-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #9ca3af; font-size: 16px; transition: color 0.3s; }
+        .toggle-icon:hover { color: #0860bb; }
+
         .forgot-pass { text-align: left; color: #0860bb; font-size: 14px; text-decoration: none; margin-top: -5px; margin-bottom: 20px; display: inline-block; cursor: pointer; }
         .forgot-pass:hover { text-decoration: underline; }
         .submit-btn { width: 100%; padding: 12px; background: #00448a; color: #ffffff; border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.3s; }
@@ -60,7 +68,12 @@
         <div id="login-form">
             <form class="form-group">
                 <input type="email" id="login-email" placeholder="Email Address" required>
-                <input type="password" id="login-password" placeholder="Password" required>
+                
+                <div class="password-wrapper">
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <i class="fa-solid fa-eye-slash toggle-icon" onclick="togglePasswordVisibility('login-password', this)"></i>
+                </div>
+
                 <a href="javascript:void(0)" class="forgot-pass" onclick="forgotPassword()">Forgot password?</a>
                 <button type="submit" class="submit-btn">Login</button>
             </form>
@@ -79,8 +92,17 @@
             <form class="form-group">
                 <input type="text" id="signup-username" placeholder="Username" required>
                 <input type="email" id="signup-email" placeholder="Email Address" required>
-                <input type="password" id="signup-password" placeholder="Password" required>
-                <input type="password" id="signup-confirm" placeholder="Confirm password" required>
+                
+                <div class="password-wrapper">
+                    <input type="password" id="signup-password" placeholder="Password" required>
+                    <i class="fa-solid fa-eye-slash toggle-icon" onclick="togglePasswordVisibility('signup-password', this)"></i>
+                </div>
+
+                <div class="password-wrapper">
+                    <input type="password" id="signup-confirm" placeholder="Confirm password" required>
+                    <i class="fa-solid fa-eye-slash toggle-icon" onclick="togglePasswordVisibility('signup-confirm', this)"></i>
+                </div>
+
                 <button type="submit" class="submit-btn">Signup</button>
             </form>
 
@@ -114,6 +136,22 @@
             document.getElementById('login-toggle').classList.remove('active');
         }
 
+        // 🔥 NAYA FUNCTION: Eye Icon ko Toggle karne ke liye
+        function togglePasswordVisibility(inputId, icon) {
+            const inputField = document.getElementById(inputId);
+            if (inputField.type === "password") {
+                inputField.type = "text";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+                icon.style.color = "#0860bb"; // Show hone par blue color
+            } else {
+                inputField.type = "password";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+                icon.style.color = "#9ca3af"; // Wapas grey color
+            }
+        }
+
         const allowedDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "icloud.com"];
 
         function validateEmailInput(emailValue) {
@@ -130,11 +168,9 @@
             return true;
         }
 
-        // 🔥 NAYA FUNCTION: Forgot Password ke liye backend ko request bhejne ka
         async function forgotPassword() {
             const email = document.getElementById('login-email').value;
 
-            // Check if user has entered an email before clicking forgot password
             if (!email) {
                 alert("Please enter your registered email address in the box above, then click 'Forgot password?'.");
                 return;
