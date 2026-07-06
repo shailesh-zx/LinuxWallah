@@ -1,3 +1,4 @@
+/*
 document.addEventListener("DOMContentLoaded", function () {
     // 1. Social login check (Google/Github se url me user name aata hai)
     const urlParams = new URLSearchParams(window.location.search);
@@ -110,3 +111,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+*/
