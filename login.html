@@ -21,7 +21,7 @@
         .form-group input { width: 100%; padding: 12px 15px; margin-bottom: 15px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; outline: none; transition: border 0.3s; }
         .form-group input::placeholder { color: #9ca3af; }
         .form-group input:focus { border-color: #0860bb; }
-        .forgot-pass { text-align: left; color: #0860bb; font-size: 14px; text-decoration: none; margin-top: -5px; margin-bottom: 20px; display: inline-block; }
+        .forgot-pass { text-align: left; color: #0860bb; font-size: 14px; text-decoration: none; margin-top: -5px; margin-bottom: 20px; display: inline-block; cursor: pointer; }
         .forgot-pass:hover { text-decoration: underline; }
         .submit-btn { width: 100%; padding: 12px; background: #00448a; color: #ffffff; border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.3s; }
         .submit-btn:hover { background: #00366d; }
@@ -61,7 +61,7 @@
             <form class="form-group">
                 <input type="email" id="login-email" placeholder="Email Address" required>
                 <input type="password" id="login-password" placeholder="Password" required>
-                <a href="reset-password.html" class="forgot-pass" onclick="forgotPassword()">Forgot password?</a>
+                <a href="javascript:void(0)" class="forgot-pass" onclick="forgotPassword()">Forgot password?</a>
                 <button type="submit" class="submit-btn">Login</button>
             </form>
 
@@ -128,6 +128,38 @@
                 return false;
             }
             return true;
+        }
+
+        // 🔥 NAYA FUNCTION: Forgot Password ke liye backend ko request bhejne ka
+        async function forgotPassword() {
+            const email = document.getElementById('login-email').value;
+
+            // Check if user has entered an email before clicking forgot password
+            if (!email) {
+                alert("Please enter your registered email address in the box above, then click 'Forgot password?'.");
+                return;
+            }
+
+            if (!validateEmailInput(email)) return;
+
+            try {
+                const response = await fetch(`${WORKER_URL}/forgot-password`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert("Reset link sent successfully! Please check your Email inbox.");
+                } else {
+                    alert("Error: " + data.error);
+                }
+            } catch (error) {
+                alert("Could not connect to the server.");
+                console.error(error);
+            }
         }
 
         document.querySelector('#login-form form').addEventListener('submit', async function(e) {
