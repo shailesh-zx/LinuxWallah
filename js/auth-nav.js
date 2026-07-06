@@ -2,10 +2,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // 1. Social login check (Google/Github se url me user name aata hai)
     const urlParams = new URLSearchParams(window.location.search);
     const oauthUser = urlParams.get('user');
+    const oauthEmail = urlParams.get('email'); // Agar email pass ho rahi ho
     
     if (oauthUser) {
         // Social account save in localstorage
-        localStorage.setItem("user", JSON.stringify({ username: decodeURIComponent(oauthUser), email: "User (Social Login)" }));
+        localStorage.setItem("user", JSON.stringify({ 
+            name: decodeURIComponent(oauthUser), 
+            email: oauthEmail ? decodeURIComponent(oauthEmail) : "Social Login User" 
+        }));
         
         // URL se ?user=... hata do taaki clean lage
         window.history.replaceState({}, document.title, window.location.pathname);
@@ -16,57 +20,70 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (userData) {
         const user = JSON.parse(userData);
+        
+        // 🔥 FIX 1: "undefined" hatane ke liye. Agar 'username' nahi hai toh 'name' check karega.
+        const realName = user.username || user.name || user.full_name || "LinuxWallah Student";
+        const realEmail = user.email || "No Email";
+        
         const avatarUrl = `https://www.gravatar.com/avatar/default?d=identicon&s=100`;
 
         // 3. Dropdown ke design ki CSS inject karo
         const style = document.createElement('style');
         style.innerHTML = `
-            .user-profile-dropdown { position: relative; display: inline-block; cursor: pointer; margin-left: 15px; }
-            .user-avatar-container { display: flex; align-items: center; gap: 8px; padding: 5px 10px; border-radius: 5px; transition: background 0.3s; }
-            .user-avatar-container:hover { background: rgba(255,255,255,0.1); }
-            .nav-user-img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--primary-blue, #0860bb); object-fit: cover; }
-            .nav-username { color: var(--text-color); font-size: 0.95rem; font-weight: 500; }
-            .profile-dropdown-menu { display: none; position: absolute; right: 0; top: 110%; background: var(--bg-color); border: 1px solid rgba(255,255,255,0.1); min-width: 220px; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.5); z-index: 1000; padding: 10px 0; font-family: 'Montserrat', sans-serif; }
+            /* Dropdown Container */
+            .user-profile-dropdown { position: relative; display: inline-block; cursor: pointer; margin-left: 10px; }
+            .user-avatar-container { display: flex; align-items: center; justify-content: center; padding: 2px; border-radius: 50%; transition: transform 0.3s; }
+            .user-avatar-container:hover { transform: scale(1.05); }
+            
+            /* 🔥 FIX 2: ONLY CIRCLE IMAGE (Naam aur arrow hata diya) */
+            .nav-user-img { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--primary-blue, #0860bb); object-fit: cover; }
+            
+            /* Dropdown Menu Box */
+            .profile-dropdown-menu { display: none; position: absolute; right: 0; top: 120%; background: #111116; border: 1px solid rgba(255,255,255,0.1); min-width: 220px; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.8); z-index: 1000; padding: 10px 0; font-family: 'Montserrat', sans-serif; }
             .profile-dropdown-menu.show { display: block; }
-            .user-info-header { padding: 10px 15px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 5px; }
-            .user-info-name { font-weight: 600; color: var(--text-color); font-size: 0.95rem; margin:0; }
-            .user-info-email { color: #888; font-size: 0.8rem; overflow: hidden; text-overflow: ellipsis; margin:0; }
-            .dropdown-item { display: flex; align-items: center; gap: 10px; padding: 10px 15px; color: var(--text-color); text-decoration: none; font-size: 0.9rem; transition: all 0.3s; }
+            
+            /* Inside Dropdown Data */
+            .user-info-header { padding: 10px 15px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 5px; text-align: left; }
+            .user-info-name { font-weight: 600; color: #fff; font-size: 0.95rem; margin:0 0 3px 0; }
+            .user-info-email { color: #aaa; font-size: 0.8rem; overflow: hidden; text-overflow: ellipsis; margin:0; }
+            
+            /* Dropdown Buttons */
+            .dropdown-item { display: flex; align-items: center; gap: 10px; padding: 10px 15px; color: #fff; text-decoration: none; font-size: 0.9rem; transition: all 0.3s; }
             .dropdown-item:hover { background: rgba(8, 96, 187, 0.15); color: var(--primary-blue, #0860bb); }
             .logout-btn { color: #ff4a4a !important; }
             .logout-btn:hover { background: rgba(255, 74, 74, 0.1) !important; }
             
-            /* Mobile Styles */
-            .mobile-user-box { display: flex; align-items: center; gap: 12px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 15px; border-left: 4px solid var(--primary-blue, #0860bb); }
-            .mobile-user-details { display: flex; flex-direction: column; }
-            .mobile-logout { padding-left: 15px; margin-top: 10px; display: inline-flex; align-items: center; gap: 8px; color: #ff4a4a; text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+            /* 🔥 FIX 3: Mobile Layout Adjustments taaki 3-line menu na hate */
+            @media (max-width: 768px) {
+                .nav-right { gap: 10px !important; display: flex; align-items: center; }
+            }
         `;
         document.head.appendChild(style);
 
-        // 4. Desktop Navbar se "Login" hatao aur Icon daalo
+        // 4. Desktop/Mobile dono ke liye sirf right side me Dropdown banega (Left ka kachra hata diya)
         const loginBtn = document.querySelector(".login-btn");
         if (loginBtn) {
             const dropdownHTML = `
                 <div class="user-profile-dropdown" id="userProfileDropdown">
                     <div class="user-avatar-container">
-                        <img src="${avatarUrl}" class="nav-user-img" alt="User">
-                        <span class="nav-username">${user.username.split(' ')[0]}</span>
-                        <i class="fas fa-caret-down" style="color:#aaa; font-size:0.8rem;"></i>
+                        <img src="${avatarUrl}" class="nav-user-img" alt="Profile">
                     </div>
+                    
                     <div class="profile-dropdown-menu" id="profileDropdownMenu">
                         <div class="user-info-header">
-                            <p class="user-info-name">${user.username}</p>
-                            <p class="user-info-email">${user.email}</p>
+                            <p class="user-info-name">${realName}</p>
+                            <p class="user-info-email">${realEmail}</p>
                         </div>
                         <a href="dashboard.html" class="dropdown-item"><i class="fas fa-desktop"></i> Dashboard</a>
                         <a href="#" class="dropdown-item logout-action logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </div>
                 </div>
             `;
-            // Button ko Dropdown menu me convert karo
+            
+            // Login Button ko Replace kar do
             loginBtn.outerHTML = dropdownHTML;
 
-            // Click karne par menu open/close ho
+            // Click Logic (Open/Close Dropdown)
             const dropContainer = document.getElementById("userProfileDropdown");
             const dropMenu = document.getElementById("profileDropdownMenu");
             
@@ -80,27 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        // 5. Mobile Hamburger ke andar Icon daalo
-        const navLinksMenu = document.getElementById("navLinks");
-        if (navLinksMenu) {
-            const mobileUserHtml = document.createElement("div");
-            mobileUserHtml.className = "mobile-profile-section";
-            mobileUserHtml.innerHTML = `
-                <div class="mobile-user-box">
-                    <img src="${avatarUrl}" class="nav-user-img" alt="User">
-                    <div class="mobile-user-details">
-                        <span class="user-info-name">${user.username}</span>
-                        <span class="user-info-email">${user.email}</span>
-                    </div>
-                </div>
-                <a href="#" class="mobile-logout logout-action"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 15px 0;">
-            `;
-            // Hamburger menu me sabse upar fit karo
-            navLinksMenu.insertBefore(mobileUserHtml, navLinksMenu.firstChild);
-        }
-
-        // 6. Logout Logic (Jab Logout dabaenge toh kya hoga)
+        // 5. Logout Logic
         document.querySelectorAll(".logout-action").forEach(button => {
             button.addEventListener("click", function (e) {
                 e.preventDefault();
