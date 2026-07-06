@@ -105,9 +105,6 @@
             <!-- Sidebar / Pricing -->
             <div class="sidebar">
                 <div class="pricing-card">
-                    <h3>Course Fee</h3>
-                    <div class="price">₹2,499 <span>₹4,999</span></div>
-                    <p class="discount">50% Off - Special Launch Price</p>
                     <ul class="features">
                         <li><i class="fas fa-graduation-cap"></i> 100% Free Course</li>
                         <li><i class="fas fa-code-branch"></i> Access to Custom AI Prompts Kit</li>
@@ -212,7 +209,7 @@
 
             actionButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
-                    e.preventDefault(); // Default anchor click behavior rokne ke liye
+                    e.preventDefault(); 
 
                     // Create Dynamic Popup Element
                     const overlay = document.createElement('div');
@@ -227,7 +224,7 @@
 
                     document.body.appendChild(overlay);
 
-                    // Redirect to login page after 2 seconds (2000 milliseconds)
+                    // Redirect to login page after 2 seconds
                     setTimeout(() => {
                         window.location.href = '../login.html';
                     }, 2000);
