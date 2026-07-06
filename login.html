@@ -136,19 +136,18 @@
             document.getElementById('login-toggle').classList.remove('active');
         }
 
-        // 🔥 NAYA FUNCTION: Eye Icon ko Toggle karne ke liye
         function togglePasswordVisibility(inputId, icon) {
             const inputField = document.getElementById(inputId);
             if (inputField.type === "password") {
                 inputField.type = "text";
                 icon.classList.remove("fa-eye-slash");
                 icon.classList.add("fa-eye");
-                icon.style.color = "#0860bb"; // Show hone par blue color
+                icon.style.color = "#0860bb"; 
             } else {
                 inputField.type = "password";
                 icon.classList.remove("fa-eye");
                 icon.classList.add("fa-eye-slash");
-                icon.style.color = "#9ca3af"; // Wapas grey color
+                icon.style.color = "#9ca3af"; 
             }
         }
 
@@ -198,6 +197,7 @@
             }
         }
 
+        // 🔥 YAHAN HUA HAI MAIN UPDATE 🔥
         document.querySelector('#login-form form').addEventListener('submit', async function(e) {
             e.preventDefault(); 
             const email = document.getElementById('login-email').value; 
@@ -213,8 +213,17 @@
                     const data = await response.json();
                     
                     if (response.ok) {
+                        // 1. Alert dikhao
                         alert("Login successful! Welcome " + data.user.username);
-                        // window.location.href = "/dashboard.html"; // Uncomment to redirect after login
+                        
+                        // 2. Data ko localStorage mein save karo (auth-nav.js yahan se padhega)
+                        localStorage.setItem("user", JSON.stringify({
+                            username: data.user.username,
+                            email: data.user.email
+                        }));
+
+                        // 3. Homepage par redirect kar do
+                        window.location.href = "index.html"; 
                     } else {
                         alert("Error: " + data.error);
                     }
