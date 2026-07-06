@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | LinuxWallah</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Montserrat', sans-serif; background: #0a0a0f; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .dash-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 40px; border-radius: 12px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px); max-width: 400px; width: 100%; }
+        .dash-avatar { width: 90px; height: 90px; border-radius: 50%; border: 3px solid #0860bb; margin-bottom: 20px; }
+        h1 { margin: 10px 0; font-size: 1.8rem; color: #0860bb; }
+        p { color: #aaa; margin: 5px 0 25px 0; font-size: 1rem; }
+        .btn-home { background: #0860bb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .btn-home:hover { background: #064b93; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+
+    <div class="dash-card">
+        <img src="https://www.gravatar.com/avatar/default?d=identicon&s=150" class="dash-avatar" alt="User">
+        <h2 style="margin:0; font-size: 1.1rem; color: #888;">Welcome Back,</h2>
+        <h1 id="dash-name">Loading Student...</h1>
+        <p id="dash-email">loading...</p>
+        <a href="index.html" class="btn-home"><i class="fas fa-home"></i> Go to Homepage</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const userData = localStorage.getItem("user");
+            if (!userData) {
+                alert("Please login first!");
+                window.location.href = "login.html";
+                return;
+            }
+            const user = JSON.parse(userData);
+            // Ek ek karke check karega ki kis key me data mila
+            document.getElementById("dash-name").innerText = user.username || user.name || user.full_name || "LinuxWallah Student";
+            document.getElementById("dash-email").innerText = user.email || "No Email Provided";
+        });
+    </script>
+</body>
+</html>
