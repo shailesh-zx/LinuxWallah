@@ -27,33 +27,23 @@
         <a href="index.html" class="btn-home"><i class="fas fa-home"></i> Go to Homepage</a>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const userData = localStorage.getItem("user");
-            if (!userData) {
-                alert("Please login first!");
-                window.location.href = "login.html";
-                return;
-            }
-            
-            try {
-                const user = JSON.parse(userData);
-                
-                // Sab variables ko check karo
-                let finalName = user.username || user.name || user.full_name || user.user || "LinuxWallah Student";
-                let finalEmail = user.email || "No Email Provided";
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const userData = localStorage.getItem("user");
+        if (!userData) {
+            window.location.href = "login.html";
+            return;
+        }
 
-                // 🔥 BULLETPROOF CHECK
-                if (finalName === "undefined") finalName = "LinuxWallah Student";
-                if (finalEmail === "undefined") finalEmail = "No Email Provided";
+        const user = JSON.parse(userData);
+        
+        // Yahan bhi check lagaya hai
+        const finalName = (user.username && user.username !== "undefined") ? user.username : "LinuxWallah Student";
+        const finalEmail = (user.email && user.email !== "undefined") ? user.email : "No Email Provided";
 
-                document.getElementById("dash-name").innerText = finalName;
-                document.getElementById("dash-email").innerText = finalEmail;
-            } catch (error) {
-                localStorage.removeItem("user");
-                window.location.href = "login.html";
-            }
-        });
-    </script>
+        document.getElementById("dash-name").innerText = finalName;
+        document.getElementById("dash-email").innerText = finalEmail;
+    });
+</script>
 </body>
 </html>
