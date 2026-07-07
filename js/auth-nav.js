@@ -1,8 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 🔥 DEBUGGING ALERT: Isse hume pata chalega backend wapas aate waqt kya bhej raha hai
-    // Agar alert me empty aaye, toh samajh jana backend se data nahi aa raha
-    alert("Backend se aane wala URL Data: " + window.location.search);
-
     const urlParams = new URLSearchParams(window.location.search);
     
     // URL se data nikalo
@@ -10,23 +6,22 @@ document.addEventListener("DOMContentLoaded", function () {
     let oauthEmail = urlParams.get('email');
     
     // 1. Agar Social Login se data aaya hai to save karo
-    if (oauthUser && oauthUser !== "undefined") {
-        
+    if (oauthUser) {
         // Random 4-character string generate karo
         const randomString = Math.random().toString(36).substring(2, 6);
         
         // Name me se spaces hata kar '-' aur random string jod do
-        let cleanName = decodeURIComponent(oauthUser).trim().replace(/\s+/g, '');
+        let cleanName = decodeURIComponent(oauthUser).trim().replace(/\s+/g, '-').toLowerCase();
         let generatedUsername = `${cleanName}-${randomString}`;
 
         const userObj = { 
             username: generatedUsername, 
-            email: (oauthEmail && oauthEmail !== "undefined") ? decodeURIComponent(oauthEmail) : "No Email Provided" 
+            email: oauthEmail ? decodeURIComponent(oauthEmail) : "No Email Provided" 
         };
         
         localStorage.setItem("user", JSON.stringify(userObj));
         
-        // URL saaf karo
+        // URL saaf karo (ताकि रिफ्रेश करने पर दोबारा प्रोसेस न हो)
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 
@@ -38,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const user = JSON.parse(userData);
             
             // Fallback check
-            let realName = (user.username && user.username !== "undefined") ? user.username : "Student";
-            let realEmail = (user.email && user.email !== "undefined") ? user.email : "No Email";
+            let realName = user.username ? user.username : "Student";
+            let realEmail = user.email ? user.email : "No Email";
             
             // Style Injector
             const style = document.createElement('style');
