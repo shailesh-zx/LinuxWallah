@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () { 
     const urlParams = new URLSearchParams(window.location.search); 
     
-    // 🔴 ERROR CHECKER: Agar Backend se koi error aata hai
+    // 🔴 ERROR CHECKER
     const authError = urlParams.get('error');
     const authDesc = urlParams.get('desc');
     
@@ -14,24 +14,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const oauthUser = urlParams.get('user'); 
     const oauthEmail = urlParams.get('email'); 
     
-    // 1. Agar Social Login se data aaya hai to save karo
+    // 1. Agar Social Login se data aaya hai to direct save karo (Kyunki backend se permanent username aa rha hai)
     if (oauthUser && oauthUser !== "undefined") { 
-        let cleanName = decodeURIComponent(oauthUser).trim().replace(/\s+/g, '-').toLowerCase();
-        const randomString = Math.random().toString(36).substring(2, 6);
-        let generatedUsername = `${cleanName}-${randomString}`;
-
         const userObj = {  
-            username: generatedUsername,  
+            username: decodeURIComponent(oauthUser),  
             email: (oauthEmail && oauthEmail !== "undefined") ? decodeURIComponent(oauthEmail) : "No Email Provided"  
         }; 
 
         localStorage.setItem("user", JSON.stringify(userObj)); 
-        
-        // 👉 Bas URL ko saaf karo (redirect mat karo, user index.html par hi rahega)
         window.history.replaceState({}, document.title, window.location.pathname); 
     } 
 
-    // 2. LocalStorage se user check karo aur UI (Dropdown) update karo
+    // 2. LocalStorage se user check karo aur Dropdown set karo
     const userData = localStorage.getItem("user"); 
 
     if (userData) { 
@@ -58,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `; 
             document.head.appendChild(style); 
 
-            // Replace Login Button with User Info Dropdown
+            // Replace Login Button with User Info 
             const loginBtn = document.querySelector(".login-btn"); 
             if (loginBtn) { 
                 loginBtn.outerHTML = ` 
@@ -75,7 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div> 
                 `; 
 
-                // Dropdown Toggle Logic
                 const dropContainer = document.getElementById("userProfileDropdown"); 
                 const dropMenu = document.getElementById("profileDropdownMenu"); 
                 
