@@ -1,39 +1,37 @@
 document.addEventListener("DOMContentLoaded", function () { 
     const urlParams = new URLSearchParams(window.location.search); 
     
-    // 🔴 ERROR CHECKER: Agar Backend se koi error aata hai, toh yaha alert dikhega
+    // 🔴 ERROR CHECKER: Agar Backend se koi error aata hai
     const authError = urlParams.get('error');
     const authDesc = urlParams.get('desc');
     
     if (authError) {
         alert("⚠️ OAUTH LOGIN FAILED!\n\nError: " + authError + "\nDetails: " + (authDesc || "No details provided.") + "\n\n(Cloudflare Dashboard me API Keys / Client Secret check karein)");
         window.history.replaceState({}, document.title, window.location.pathname);
-        return; // Aage ka code nahi chalega, error yahi ruk jayega
+        return; 
     }
 
     const oauthUser = urlParams.get('user'); 
     const oauthEmail = urlParams.get('email'); 
     
-    // 1. Agar Social Login se data aaya hai to save karo (Sath me Random Name Generate karo)
-    if (oauthUser) { 
-        // Naam se space hatakar lowercase banayega
+    // 1. Agar Social Login se data aaya hai to save karo
+    if (oauthUser && oauthUser !== "undefined") { 
         let cleanName = decodeURIComponent(oauthUser).trim().replace(/\s+/g, '-').toLowerCase();
-        
-        // 4 character ki random string
         const randomString = Math.random().toString(36).substring(2, 6);
         let generatedUsername = `${cleanName}-${randomString}`;
 
         const userObj = {  
             username: generatedUsername,  
-            email: oauthEmail ? decodeURIComponent(oauthEmail) : "No Email Provided"  
+            email: (oauthEmail && oauthEmail !== "undefined") ? decodeURIComponent(oauthEmail) : "No Email Provided"  
         }; 
 
         localStorage.setItem("user", JSON.stringify(userObj)); 
-        // URL saaf karo
+        
+        // 👉 Bas URL ko saaf karo (redirect mat karo, user index.html par hi rahega)
         window.history.replaceState({}, document.title, window.location.pathname); 
     } 
 
-    // 2. LocalStorage se user check karo 
+    // 2. LocalStorage se user check karo aur UI (Dropdown) update karo
     const userData = localStorage.getItem("user"); 
 
     if (userData) { 
@@ -60,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `; 
             document.head.appendChild(style); 
 
-            // Replace Login Button with User Info 
+            // Replace Login Button with User Info Dropdown
             const loginBtn = document.querySelector(".login-btn"); 
             if (loginBtn) { 
                 loginBtn.outerHTML = ` 
