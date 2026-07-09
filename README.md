@@ -1,8 +1,9 @@
 # 🐧 LinuxWallah (linuxwallah.in)
 
 [![Cloudflare Pages](https://img.shields.io/badge/Deployed%20with-Cloudflare%20Pages-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://linuxwallah.in)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/shailesh-zx)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/shailesh.zx)
 [![GitHub License](https://img.shields.io/github/license/shailesh-zx/LinuxWallah?style=for-the-badge)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/shailesh-zx/LinuxWallah?style=for-the-badge)](https://github.com/shailesh-zx/LinuxWallah/stargazers)
 
 Welcome to the official repository of **[linuxwallah.in](https://linuxwallah.in)**! 🚀
 
@@ -72,11 +73,12 @@ Contributions, issue reports, and technical feature requests are highly apprecia
 
 ---
 
-## 👤 Author
+## 🔗 Connect With Me
 
-**Shailesh Bhagat (shailesh-zx)**
-* **GitHub:** [@shailesh-zx](https://github.com/shailesh-zx)
 * **Website:** [linuxwallah.in](https://linuxwallah.in)
+* **GitHub:** [@shailesh-zx](https://github.com/shailesh-zx)
+* **LinkedIn:** [Shailesh-zx on LinkedIn](https://linkedin.com/in/shailesh-zx)
+* **Instagram:** [@shailesh.zx](https://instagram.com/shailesh.zx)
 
 ---
 
