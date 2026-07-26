@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | LinuxWallah</title>
+    <link rel="icon" href="assets/shield-logo.png">
+    <!-- FontAwesome 6.4.0 for all latest icons like X-Twitter -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        .contact-wrapper {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 20px 60px;
+            position: relative;
+        }
+        .contact-card {
+            width: 100%;
+            max-width: 600px; /* Thoda bada kiya taki sab links acche se aayein */
+            text-align: center;
+        }
+        .contact-info-grid {
+            margin: 30px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 columns for better layout */
+            gap: 15px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px;
+            background: var(--nav-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .contact-item.full-width {
+            grid-column: span 2;
+        }
+        .contact-item:hover {
+            transform: translateY(-4px);
+            z-index: 2;
+        }
+        .contact-item i {
+            font-size: 1.5rem;
+        }
+        
+        /* Brand Colors on Hover */
+        .item-whatsapp:hover { color: #25D366; border-color: #25D366; box-shadow: 0 8px 25px rgba(37, 211, 102, 0.15); }
+        .item-call:hover { color: #00E676; border-color: #00E676; box-shadow: 0 8px 25px rgba(0, 230, 118, 0.15); }
+        .item-email:hover { color: var(--primary-blue); border-color: var(--primary-blue); box-shadow: 0 8px 25px rgba(33, 150, 243, 0.15); }
+        .item-instagram:hover { color: #E1306C; border-color: #E1306C; box-shadow: 0 8px 25px rgba(225, 48, 108, 0.15); }
+        .item-linkedin:hover { color: #0077b5; border-color: #0077b5; box-shadow: 0 8px 25px rgba(0, 119, 181, 0.15); }
+        .item-x:hover { color: #1DA1F2; border-color: #1DA1F2; box-shadow: 0 8px 25px rgba(29, 161, 242, 0.15); }
+        .item-reddit:hover { color: #FF4500; border-color: #FF4500; box-shadow: 0 8px 25px rgba(255, 69, 0, 0.15); }
+        .item-orcid:hover { color: #A6CE39; border-color: #A6CE39; box-shadow: 0 8px 25px rgba(166, 206, 57, 0.15); }
+
+        /* Dark mode specific fix for X (Twitter) */
+        [data-theme="dark"] .item-x:hover { color: #ffffff; border-color: #ffffff; box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2); }
+
+        @media (max-width: 600px) {
+            .contact-info-grid {
+                grid-template-columns: 1fr; /* Mobile me 1 column */
+            }
+            .contact-item.full-width {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/full-logo.png" alt="LinuxWallah Logo">
+            </a>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" style="color: var(--primary-blue);">Contact</a>
+            </div>
+
+            <div class="nav-right">
+                <a href="login.html" class="btn login-btn">Login</a>
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Social / Contact Section -->
+    <section class="contact-wrapper">
+        <div class="cyber-grid"></div> 
+        <div class="glass-card contact-card">
+            <h2 style="color: var(--primary-blue); margin-bottom: 10px; font-size: 2.2rem;">Let's Connect</h2>
+            <p style="opacity: 0.8; font-size: 1rem; line-height: 1.5;">Reach out to me for collaborations, cyber security consultation, or learning queries.</p>
+            
+            <div class="contact-info-grid">
+                
+                <!-- Email (Full Width) -->
+                <a href="mailto:shailesh.github@gmail.com" class="contact-item item-email full-width">
+                    <i class="fas fa-envelope"></i> shailesh.github@gmail.com
+                </a>
+
+                <!-- Phone -->
+                <a href="tel:+919006865950" class="contact-item item-call">
+                    <i class="fas fa-phone-alt"></i> +91 9006865950
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/+919006865950" target="_blank" class="contact-item item-whatsapp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                
+                <!-- Instagram -->
+                <a href="https://instagram.com/shailesh.zx" target="_blank" class="contact-item item-instagram">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                
+                <!-- LinkedIn -->
+                <a href="https://linkedin.com/in/shailesh-zx" target="_blank" class="contact-item item-linkedin">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                
+                <!-- X (Twitter) -->
+                <a href="https://x.com/ZxShailesh" target="_blank" class="contact-item item-x">
+                    <i class="fab fa-x-twitter"></i> X (Twitter)
+                </a>
+
+                <!-- Reddit -->
+                <a href="https://www.reddit.com/user/Shailesh-Zx/" target="_blank" class="contact-item item-reddit">
+                    <i class="fab fa-reddit"></i> Reddit
+                </a>
+
+                <!-- ORCID -->
+                <a href="https://orcid.org/0009-0003-5520-8423" target="_blank" class="contact-item item-orcid">
+                    <i class="fab fa-orcid"></i> ORCID
+                </a>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Theme Button -->
+    <div class="floating-controls">
+        <button id="theme-toggle" class="theme-btn" title="Toggle Dark/Light Mode">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/mobile-menu.js"></script>
+    <script src="js/auth-nav.js"></script>
+</body>
+</html>
