@@ -244,33 +244,52 @@
         document.addEventListener("DOMContentLoaded", function() {
             const actionButtons = document.querySelectorAll('.enroll-btn, .pricing-card .btn-full');
 
+            function getLoggedInUser() {
+                const rawUser = localStorage.getItem('user') || localStorage.getItem('currentUser');
+                if (rawUser) {
+                    try {
+                        return JSON.parse(rawUser);
+                    } catch (e) {
+                        return { username: rawUser };
+                    }
+                }
+                if (localStorage.getItem('isLoggedIn') === 'true') {
+                    return { username: 'Learner' };
+                }
+                return null;
+            }
+
             actionButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault(); 
 
-                    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true' || localStorage.getItem('currentUser') !== null;
+                    const user = getLoggedInUser();
                     const overlay = document.createElement('div');
                     overlay.className = 'login-popup-overlay';
 
-                    if (!isLoggedIn) {
+                    if (!user) {
                         overlay.innerHTML = `
                             <div class="login-popup-card">
                                 <i class="fas fa-user-lock"></i>
-                                <p>You must log in to join the course. If you are not logged in, you cannot enroll.</p>
+                                <h3>Login Required</h3>
+                                <p>You must log in to join the course. Redirecting to login page...</p>
                             </div>
                         `;
                         document.body.appendChild(overlay);
+
                         setTimeout(() => {
                             window.location.href = '../login.html';
                         }, 2000);
+
                     } else {
+                        const username = user.username || 'Learner';
                         overlay.innerHTML = `
                             <div class="login-popup-card dev-card">
                                 <button class="popup-close-btn">&times;</button>
                                 <i class="fas fa-laptop-code"></i>
-                                <h3>Course Content Under Progress!</h3>
+                                <h3>Welcome, ${username}! 🎉</h3>
                                 <p style="margin-bottom: 12px;">This course material is currently under development and will be available very soon.</p>
-                                <p style="font-size: 0.95rem;">For more details or inquiries, please feel free to <a href="../contact.html">Contact Us</a>.</p>
+                                <p style="font-size: 0.95rem;">For more details or inquiries, please feel free to <a href="https://wa.me/+919006865950" target="_blank">Contact Us</a>.</p>
                             </div>
                         `;
                         document.body.appendChild(overlay);
